@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Drawer, Header } from './scence';
+import { Drawer, Footer, Header } from './scence';
 
 const App = () => {
   return (
@@ -11,6 +11,7 @@ const App = () => {
           <Route path='/' />
         </Routes>
       </main>
+      <Footer />
     </>
   );
 };

@@ -42,8 +42,10 @@ const SearchView = () => {
   };
 
   const handleSubmitSearch = () => {
-    dispatch(toggleSearchView());
-    updateSearchHistory(searchInputValue);
+    if (inputRefValue.current.value) {
+      dispatch(toggleSearchView());
+      updateSearchHistory(searchInputValue);
+    }
   };
 
   const handleSubmitSearchKey = e => {
