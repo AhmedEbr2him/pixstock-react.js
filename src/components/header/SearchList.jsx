@@ -1,0 +1,28 @@
+import MaterialIcon from '../common/MaterialIcon';
+
+const SearchList = ({ searchHistory, setSearchHistory }) => {
+  const removeItem = removedIndex => {
+    const updateItems = searchHistory.items.filter((_, index) => index !== removedIndex);
+
+    // COPY OLD ITEMS ARRAY, GIVE ITEMS NEW VALUE WITH UPDATEITEMS
+    const updateHistory = { ...searchHistory, items: updateItems };
+
+    setSearchHistory(updateHistory);
+    localStorage.setItem('search_history', JSON.stringify(updateHistory));
+  };
+  return (
+    <div className='list'>
+      {searchHistory?.items?.slice(0, 5).map((item, index) => (
+        <button key={index} type='button' aria-label='search history item' className='list-item'>
+          <MaterialIcon icon={'history'} />
+          <span className='body-large text'>{item}</span>
+          <span className='remove-item label-medium' onClick={() => removeItem(index)}>
+            Remove
+          </span>
+          <div className='state-layer'></div>
+        </button>
+      ))}
+    </div>
+  );
+};
+export default SearchList;

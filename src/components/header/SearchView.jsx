@@ -1,16 +1,39 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '../common/IconButton';
-import { toggleSearchView, searchValueInput, getSegmentValue } from '../../redux/slices/mainSlice';
+import { toggleSearchView, getSearchValueInput } from '../../redux/slices/mainSlice';
+import { SearchList, SearchViewContent } from '../index';
 
 const SearchView = () => {
   const dispatch = useDispatch();
   const inputRefValue = useRef(null);
   const { isSearchViewOpen, searchInputValue } = useSelector(state => state.mainReducer);
+  const [searchHistory, setSearchHistory] = useState(
+    JSON.parse(localStorage.getItem('search_history') || { items: [] })
+  );
+
+  /* SEARCH HISTORY FUNCTION */
+  const updateSearchHistory = searchValue => {
+    /* IF SEARCH VALUE IS ALREADY ON SEARCH HISTORY DONT ADD IT AGAIN, INSTADE OF REMOVE IT AND ADD IT AGAIN */
+    if (searchHistory.items.includes(searchValue)) {
+      searchHistory.items.splice(searchHistory.items.indexOf(searchValue), 1);
+    }
+    /* IF NOT ADD IT ON FIRST OF SEARCH HISTORY */
+    searchHistory.items.unshift(searchValue);
+    localStorage.setItem('search_history', JSON.stringify(searchHistory));
+  };
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('search_history'))) {
+      setSearchHistory(JSON.parse(localStorage.getItem('search_history')));
+    } else {
+      localStorage.setItem('search_history', JSON.stringify(searchHistory));
+    }
+  }, [setSearchHistory]);
 
   const handleDeleteSearchValue = () => {
     inputRefValue.current.value = '';
-    dispatch(searchValueInput(''));
+    dispatch(getSearchValueInput(''));
   };
 
   const handleBackSearch = () => {
@@ -18,6 +41,16 @@ const SearchView = () => {
     dispatch(toggleSearchView());
   };
 
+  const handleSubmitSearch = () => {
+    dispatch(toggleSearchView());
+    updateSearchHistory(searchInputValue);
+  };
+
+  const handleSubmitSearchKey = e => {
+    if (e.key === 'Enter') {
+      handleSubmitSearch();
+    }
+  };
   return (
     <div className={`search-veiw ${isSearchViewOpen ? 'show' : ''}`}>
       <div className='search-bar'>
@@ -41,7 +74,8 @@ const SearchView = () => {
             className='input-field body-large'
             ref={inputRefValue}
             defaultValue={searchInputValue}
-            onChange={e => dispatch(searchValueInput(e.target.value))}
+            onChange={e => dispatch(getSearchValueInput(e.target.value))}
+            onKeyDown={handleSubmitSearchKey}
           />
         </div>
 
@@ -50,60 +84,15 @@ const SearchView = () => {
           addClass='search-btn'
           icon='search'
           ariaLabel='Submit search'
-          onClick={() => dispatch(toggleSearchView())}
+          onClick={handleSubmitSearch}
         />
         <div className='state-layer'></div>
       </div>
 
-      <SearchViewContent />
-
-      <div className='list'></div>
+      <SearchViewContent dispatch={dispatch} />
+      <SearchList searchHistory={searchHistory} setSearchHistory={setSearchHistory} />
     </div>
   );
 };
 
-const SearchViewContent = () => {
-  const dispatch = useDispatch();
-  const { segmentValue } = useSelector(state => state.mainReducer);
-  const [segmentSelected, setSegmentSelected] = useState(segmentValue);
-
-  const handleSegmentButton = e => {
-    const value = e.currentTarget.dataset.segment_value;
-    dispatch(getSegmentValue(value));
-    setSegmentSelected(value);
-  };
-
-  return (
-    <div className='search-veiw-content'>
-      <div className='btn-group'>
-        <button
-          className={`btn-segment ${segmentSelected === 'photos' ? 'selected' : ''}`}
-          data-ripple
-          data-segment_value='photos'
-          onClick={handleSegmentButton}
-        >
-          <span className='material-symbols-outlined' aria-hidden='true'>
-            image
-          </span>
-          <span className='label-large'>Photos</span>
-          <div className='state-layer'></div>
-        </button>
-
-        <button
-          className={`btn-segment ${segmentSelected === 'videos' ? 'selected' : ''}`}
-          data-ripple
-          data-segment_value='videos'
-          onClick={handleSegmentButton}
-        >
-          <span className='material-symbols-outlined' aria-hidden='true'>
-            videocam
-          </span>
-          <span className='label-large'>Videos</span>
-          <div className='state-layer'></div>
-        </button>
-      </div>
-      <div className='divider'></div>
-    </div>
-  );
-};
 export default SearchView;

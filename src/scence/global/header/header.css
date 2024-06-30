@@ -124,3 +124,49 @@
   color: var(--on-secondary-container);
   --state-layer-bg: var(--on-secondary-container);
 }
+
+/**
+ * List
+ */
+.list {
+  padding-block: 8px;
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-inline: 16px 24px;
+  padding-block: 8px;
+  height: 48px;
+  width: 100%;
+  --state-layer-bg: var(--on-surface);
+}
+.list-item .text {
+  color: var(--on-surface);
+}
+.list-item .leading-icon {
+  font-size: 1.8rem;
+  color: var(--on-surface-variant);
+}
+.list-item.two-line {
+  justify-content: space-between;
+  padding-inline-end: 12px;
+  height: 72px;
+}
+.list-item.two-line .body-large {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.list-item.two-line > .state-layer {
+  pointer-events: all;
+}
+.list-item .remove-item {
+  color: var(--on-primary-container);
+  margin-left: auto;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

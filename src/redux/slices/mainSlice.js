@@ -18,7 +18,7 @@ const mainSlice = createSlice({
       state.isSearchViewOpen = !state.isSearchViewOpen;
       sessionStorage.setItem('searchViewState', JSON.stringify(state.isSearchViewOpen));
     },
-    searchValueInput: (state, action) => {
+    getSearchValueInput: (state, action) => {
       state.searchInputValue = action.payload;
     },
     getSegmentValue: (state, action) => {
@@ -28,5 +28,5 @@ const mainSlice = createSlice({
 });
 
 export default mainSlice.reducer;
-export const { toggleSearchView, toggleDrawer, searchValueInput, getSegmentValue } =
+export const { toggleSearchView, toggleDrawer, getSearchValueInput, getSegmentValue } =
   mainSlice.actions;
