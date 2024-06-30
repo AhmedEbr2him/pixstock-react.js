@@ -257,7 +257,7 @@ html {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
 }
-body {
+#root {
   background-color: var(--background);
   color: var(--on-background);
   font-size: 1.6rem;
@@ -558,6 +558,13 @@ button:disabled {
   100% {
     rotate: 360deg;
   }
+}
+/*-----------------------------------*\
+  #MAIN
+\*-----------------------------------*/
+.main {
+  padding-block-start: calc(var(--top-app-bar-height) + 16px);
+  flex-grow: 1;
 }
 /*-----------------------------------*\
   #COMPONENT

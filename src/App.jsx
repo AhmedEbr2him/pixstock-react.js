@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { Drawer, Footer, Header } from './scence';
+import { Drawer, Footer, Header, Home } from './scence';
+import { routeConstants } from './constants/routeConstants';
 
 const App = () => {
   return (
@@ -7,9 +8,11 @@ const App = () => {
       <Header />
       <Drawer />
       <main className='main'>
-        <Routes>
-          <Route path='/' />
-        </Routes>
+        <article>
+          <Routes>
+            <Route path={routeConstants.home} element={<Home />} />
+          </Routes>
+        </article>
       </main>
       <Footer />
     </>
