@@ -4,6 +4,7 @@ export { default as MaterialIcon } from './common/MaterialIcon';
 export { default as LinkBtn } from './common/LinkBtn';
 export { default as SectionTitle } from './common/SectionTitle';
 export { default as MediaGrid } from './common/MediaGrid';
+export { default as PhotoCard } from './common/PhotoCard';
 
 /* HEADER */
 export { default as SearchView } from './header/SearchView';

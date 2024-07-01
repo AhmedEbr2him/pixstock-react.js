@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react';
-
 const IconButton = ({ ariaLabel, icon, moreIcon, addClass, onClick, onKeyDown }) => {
   return (
     <button
