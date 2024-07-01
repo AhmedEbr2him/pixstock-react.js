@@ -454,12 +454,12 @@ button:disabled {
   margin-block-end: 12px;
 }
 .media-grid {
-  --column-count: 2;
-  --column-gap: 8px;
+  /* --column-count: 2; */
+  /* --column-gap: 8px; */
 
-  display: grid;
-  grid-template-columns: repeat(var(--column-count), minmax(0, 1fr));
-  gap: var(--column-gap);
+  /* display: grid; */
+  /* grid-template-columns: repeat(var(--column-count), minmax(0, 1fr)); */
+  /* gap: var(--column-gap); */
   /* for javascript */
   overflow: hidden;
 }
@@ -830,4 +830,19 @@ button:disabled {
 }
 .filter-chip.selected .close-icon {
   padding: 8px;
+}
+
+/*-----------------------------------*\
+  #COLLECTION
+\*-----------------------------------*/
+.grid-card .label {
+  color: var(--on-surface-variant);
+}
+
+.collection-grid .list-item {
+  border-block-end: 1px solid var(--outline-variant);
+}
+.collection .btn {
+  margin-block: 12px;
+  margin-inline: auto;
 }

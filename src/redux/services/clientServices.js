@@ -23,15 +23,15 @@ let requestUrl = '';
 
 /* PHOTOS */
 const fetchPhotos = {
-  search: async (parameters, callback) => {
+  search: (parameters, callback) => {
     requestUrl = `${root.default}search?${urlEncode(parameters)}`;
     return fetchData(requestUrl, callback);
   },
-  curated: async (parameters, callback) => {
+  curated: (parameters, callback) => {
     requestUrl = `${root.default}curated?${urlEncode(parameters)}`;
     return fetchData(requestUrl, callback);
   },
-  detail: async (id, callback) => {
+  detail: (id, callback) => {
     requestUrl = `${root.default}photos/${id}`;
     return fetchData(requestUrl, callback);
   },
