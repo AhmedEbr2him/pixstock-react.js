@@ -5,3 +5,4 @@ export { default as Footer } from './global/footer/Footer';
 
 /* MAIN */
 export { default as Home } from './home/index';
+export { default as Photos } from './photos/index';

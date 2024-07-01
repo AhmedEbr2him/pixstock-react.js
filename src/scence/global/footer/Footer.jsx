@@ -11,8 +11,8 @@ const Footer = () => {
             <Link to={routeConstants.home}>Pixstock</Link>
             <div className='text body-small'>
               Pixstock is a stock photo app developed by
-              <span className='color-primary'>ahmedebrahim</span> and all Photos and Videos provided
-              by
+              <span className='color-primary'>&nbsp;ahmedebrahim</span> and all Photos and Videos
+              provided by
               <Link to='https://pexels.com'>Pexels</Link>.
             </div>
           </div>
@@ -21,10 +21,10 @@ const Footer = () => {
             <p className='title label-medium'>Follow us on</p>
             <div className='social-list'>
               <Link to='#' className='label-small color-primary'>
-                Youtube
+                Youtube&nbsp;
               </Link>
               <Link to='#' className='label-small color-primary'>
-                Github
+                Github&nbsp;
               </Link>
               <Link to='#' className='label-small color-primary'>
                 Twitter (X)

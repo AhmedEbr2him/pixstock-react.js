@@ -17,33 +17,35 @@ const Drawer = () => {
   ];
 
   return (
-    <nav className={`navigation ${isDrawerOpen ? 'show' : ''}`}>
-      <div className='navigation-header'>
-        <IconButton
-          ariaLabel='Close menu'
-          icon='arrow_back'
-          onClick={() => dispatch(toggleDrawer())}
-        />
-        <Link to={routeConstants}>Pixstock</Link>
-      </div>
-
-      <ul className='drawer-list'>
-        {drawerItems.map((item, index) => (
-          <DrawerItem
-            key={index}
-            to={item.to}
-            icon={item.icon}
-            label={item.label}
+    <>
+      <nav className={`navigation ${isDrawerOpen ? 'show' : ''}`}>
+        <div className='navigation-header'>
+          <IconButton
+            ariaLabel='Close menu'
+            icon='arrow_back'
             onClick={() => dispatch(toggleDrawer())}
           />
-        ))}
-      </ul>
-      {/* SCRIM */}
+          <Link to={routeConstants}>Pixstock</Link>
+        </div>
+
+        <ul className='drawer-list'>
+          {drawerItems.map((item, index) => (
+            <DrawerItem
+              key={index}
+              to={item.to}
+              icon={item.icon}
+              label={item.label}
+              onClick={() => dispatch(toggleDrawer())}
+            />
+          ))}
+        </ul>
+        {/* SCRIM */}
+      </nav>
       <div
         className={`scrim ${isDrawerOpen ? 'active' : ''}`}
         onClick={() => dispatch(toggleDrawer())}
       ></div>
-    </nav>
+    </>
   );
 };
 

@@ -14,29 +14,31 @@ const PhotoCard = ({ itemData }) => {
   const favoritePhotos = JSON.parse(localStorage.getItem('favorite'));
 
   return (
-    <div className='card grid-item' style={{ backgroundColor: backgroundColor }}>
-      <figure className='card-banner' style={{ '--width': width, '--height': height }}>
-        <img
-          src={large}
-          alt={alt}
-          width={width}
-          height={height}
-          loading='lazy'
-          className='img-cover'
-        />
-      </figure>
-      <div className='card-content'>
-        <button
-          aria-label='Add to favorite'
-          className={`icon-btn small ${favoritePhotos?.photos[id] ? 'active' : ''}`}
-        >
-          <MaterialIcon icon={'favorite'} />
-          <div className='state-layer'></div>
-        </button>
-      </div>
+    itemData && (
+      <div className='card grid-item' style={{ backgroundColor: backgroundColor }}>
+        <figure className='card-banner' style={{ '--width': width, '--height': height }}>
+          <img
+            src={large}
+            alt={alt}
+            width={width}
+            height={height}
+            loading='lazy'
+            className='img-cover'
+          />
+        </figure>
+        <div className='card-content'>
+          <button
+            aria-label='Add to favorite'
+            className={`icon-btn small ${favoritePhotos?.photos[id] ? 'active' : ''}`}
+          >
+            <MaterialIcon icon={'favorite'} />
+            <div className='state-layer'></div>
+          </button>
+        </div>
 
-      <Link to={`${routeConstants.photos_detail}?id=${id}`} className='state-layer'></Link>
-    </div>
+        <Link to={`${routeConstants.photos_detail}?id=${id}`} className='state-layer'></Link>
+      </div>
+    )
   );
 };
 export default PhotoCard;

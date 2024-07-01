@@ -5,8 +5,8 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 const MediaGrid = ({ data, isLoading }) => {
   return (
     <>
-      {isLoading && <Skeleton />}
       <div className='media-grid'>
+        {isLoading && <Skeleton />}
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 700: 3 }}>
           <Masonry columnsCount={2} gutter='10px'>
             {data?.photos &&

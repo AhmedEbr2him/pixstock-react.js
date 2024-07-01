@@ -209,7 +209,7 @@ const clientSlice = createSlice({
       })
       .addCase(fetchCuratedPhotos.rejected, (state, action) => {
         state.error = action.payload;
-        state.isLoading.photos.fetchCuratedPhotos = false;
+        state.isLoading.photos.fetchCuratedPhotos = true;
         state.isSuccess.photos.fetchCuratedPhotos = false;
         state.isError.photos.fetchCuratedPhotos = true;
       })

@@ -7,6 +7,7 @@ export { default as MediaGrid } from './common/MediaGrid';
 export { default as PhotoCard } from './common/PhotoCard';
 export { default as VideoCard } from './common/VideoCard';
 export { default as CollectionCard } from './common/CollectionCard';
+export { default as PageTitle } from './common/PageTitle';
 
 /* HEADER */
 export { default as SearchView } from './header/SearchView';

@@ -644,7 +644,7 @@ button:disabled {
   position: fixed;
   inset: 0;
   background-color: var(--scrim);
-  z-index: -1;
+  z-index: 5;
   opacity: 0;
   visibility: hidden;
   transition: var(--motion-duration-medium) var(--motion-easing-linear);
@@ -699,6 +699,9 @@ button:disabled {
   overflow: hidden;
   transition: box-shadow var(--motion-duration-short-2) var(--motion-easing-linear);
   --state-layer-bg: var(--on-surface);
+  opacity: 1;
+  transition: 1s;
+  animation: fadeIn 0.5s ease;
 }
 .card:hover {
   box-shadow: var(--elevation-1);
@@ -730,6 +733,14 @@ button:disabled {
 }
 .card.video {
   background-color: var(--surface-container-highest);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 /**
  * Menu 
