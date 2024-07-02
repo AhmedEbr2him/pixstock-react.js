@@ -4,7 +4,6 @@ import { routeConstants } from '../../constants/routeConstants';
 import { useEffect, useRef, useState } from 'react';
 
 const VideoCard = ({ videoData }) => {
-  // const { height, width, id, image, video_files } = videoData;
   const [videoUsageData, setVideoUsageData] = useState({
     height: '',
     width: '',
@@ -12,6 +11,7 @@ const VideoCard = ({ videoData }) => {
     image: '',
     video_files: [],
   });
+
   const sdVideo =
     videoData &&
     videoUsageData?.video_files?.find(item => item.quality === 'sd' && item.width < 1000);
