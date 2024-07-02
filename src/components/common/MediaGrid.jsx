@@ -1,23 +1,18 @@
 import Skeleton from './Skeleton';
 import { PhotoCard, VideoCard } from '../';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { useSelector } from 'react-redux';
 
-const MediaGrid = ({ data, isLoading }) => {
+const MediaGrid = ({ children }) => {
+  // GET VIDEO DATA HERE CAUS NETWORK ERROR HANDLE
+  const videosData = useSelector(state => state.clientReducer.client.videos.popular);
+
   return (
     <>
       <div className='media-grid'>
-        {isLoading && <Skeleton />}
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 700: 3 }}>
           <Masonry columnsCount={2} gutter='10px'>
-            {data?.photos &&
-              data?.photos?.map((photo, index) => (
-                <PhotoCard key={index} itemData={photo} index={index} />
-              ))}
-
-            {data?.videos &&
-              data?.videos?.map((video, index) => (
-                <VideoCard key={index} videoData={video} index={index} />
-              ))}
+            {children}
           </Masonry>
         </ResponsiveMasonry>
       </div>

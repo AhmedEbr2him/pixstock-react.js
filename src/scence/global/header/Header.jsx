@@ -1,6 +1,6 @@
 import './header.css';
 import { Link } from 'react-router-dom';
-import { IconButton, SearchView } from '../../../components';
+import { IconButton, SearchView, ThemeSwitch } from '../../../components';
 import { routeConstants } from '../../../constants/routeConstants';
 import { useDispatch } from 'react-redux';
 import { toggleSearchView, toggleDrawer } from '../../../redux/slices/mainSlice';
@@ -24,20 +24,7 @@ const Header = () => {
         icon={'search'}
         onClick={() => dispatch(toggleSearchView())}
       />
-      <button
-        className='icon-btn theme-switch'
-        aria-label='Theme switch'
-        data-ripple
-        onClick={() => changeTheme()}
-      >
-        <span className='material-symbols-outlined dark-icon' aria-hidden='true'>
-          dark_mode
-        </span>
-        <span className='material-symbols-outlined light-icon' aria-hidden='true'>
-          light_mode
-        </span>
-        <div className='state-layer'></div>
-      </button>
+      <ThemeSwitch />
     </header>
   );
 };

@@ -1,5 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Banner, CollectionCard, MediaGrid, SectionTitle } from '../../components';
+import {
+  Banner,
+  CollectionCard,
+  MediaGrid,
+  PhotoCard,
+  SectionTitle,
+  VideoCard,
+} from '../../components';
 import OverlayBtn from '../../components/common/OverlayBtn';
 import { routeConstants } from '../../constants/routeConstants';
 import { useEffect } from 'react';
@@ -9,20 +16,21 @@ import {
   fetchPopularVideos,
 } from '../../redux/slices/clientSlice';
 import { Link } from 'react-router-dom';
+import scrollToTop from '../../utils/scrollToTop';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const photosData = useSelector(state => state.clinetReducer.client.photos.curated);
-  const videosData = useSelector(state => state.clinetReducer.client.videos.popular);
-  const collectionsData = useSelector(state => state.clinetReducer.client.collections.featured);
+  const photosData = useSelector(state => state.clientReducer.client.photos.curated);
+  const videosData = useSelector(state => state.clientReducer.client.videos.popular);
+  const collectionsData = useSelector(state => state.clientReducer.client.collections.featured);
   const isPhotosLoading = useSelector(
-    state => state.clinetReducer.isLoading.photos.fetchCuratedPhotos
+    state => state.clientReducer.isLoading.photos.fetchCuratedPhotos
   );
   const isVideosLoading = useSelector(
-    state => state.clinetReducer.isLoading.videos.fetchPopularVideos
+    state => state.clientReducer.isLoading.videos.fetchPopularVideos
   );
   const isCollectionsLoading = useSelector(
-    state => state.clinetReducer.isLoading.collection.fetchFeaturedCollections
+    state => state.clientReducer.isLoading.collection.fetchFeaturedCollections
   );
 
   useEffect(() => {
@@ -31,6 +39,9 @@ const Home = () => {
     dispatch(fetchFeaturedCollections({ page: 2, per_page: 18 }));
   }, [dispatch]);
 
+  useEffect(() => {
+    scrollToTop();
+  }, []);
   return (
     <>
       <Banner />
@@ -39,7 +50,10 @@ const Home = () => {
       <section className='section featured-photos' aria-labelledby='featured-photos'>
         <div className='container'>
           <SectionTitle title='Featured Photos' id='section label' />
-          <MediaGrid data={photosData} isLoading={isPhotosLoading} />
+          <MediaGrid>
+            {photosData.photos &&
+              photosData.photos.map((photo, index) => <PhotoCard itemData={photo} key={index} />)}
+          </MediaGrid>
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>
       </section>
@@ -47,7 +61,10 @@ const Home = () => {
       <section className='section popular-videos' aria-labelledby='popular-videos'>
         <div className='container'>
           <SectionTitle title='Featured Videos' id='section label' />
-          <MediaGrid data={videosData} isLoading={isVideosLoading} />
+          <MediaGrid>
+            {videosData.videos &&
+              videosData.videos.map((video, index) => <VideoCard videoData={video} key={index} />)}
+          </MediaGrid>
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>
       </section>

@@ -9,9 +9,12 @@ const requestOption = { headers };
 const fetchData = async (url, successCallback) => {
   const response = await fetch(url, requestOption);
 
-  if (response.ok) {
+  try {
     const data = await response.json();
     return successCallback(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
   }
 };
 

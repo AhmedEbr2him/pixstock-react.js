@@ -4,7 +4,7 @@ import mainSlice from './slices/mainSlice';
 
 export const store = configureStore({
   reducer: {
-    clinetReducer: clientSlice,
+    clientReducer: clientSlice,
     mainReducer: mainSlice,
   },
 });

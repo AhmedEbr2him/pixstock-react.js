@@ -1,36 +1,37 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { PageTitle, PhotoCard } from '../../components';
-import { fetchCuratedPhotos } from '../../redux/slices/clientSlice';
 import { useEffect, useRef, useState } from 'react';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPopularVideos } from '../../redux/slices/clientSlice';
 import scrollToTop from '../../utils/scrollToTop';
+import { PageTitle, VideoCard } from '../../components';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import useInfinitieScroll from '../../hooks/useInfiniteScroll';
 import Skeleton from '../../components/common/Skeleton';
-
-const Photos = () => {
+const Videos = () => {
   const dispatch = useDispatch();
-  const initialPhotosData = useSelector(state => state.clientReducer.client.photos.curated);
-  const isPhotosLoading = useSelector(
-    state => state.clientReducer.isLoading.photos.fetchCuratedPhotos
+  const initialVideosData = useSelector(state => state.clientReducer.client.videos.popular);
+  const isVideosLoading = useSelector(
+    state => state.clientReducer.isLoading.videos.fetchPopularVideos
   );
-
-  const [photosData, setPhotoData] = useState([]);
+  const [videosData, setVideosData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const loader = useRef(null);
   const [isLoad, setIsLoad] = useState(true);
   let totalPages = 0;
   const perPage = 30;
-  totalPages = Math.ceil(initialPhotosData?.total_results / perPage);
+  totalPages = Math.ceil(initialVideosData?.total_results / perPage);
 
+  /* FETCH MAIN DATA */
   useEffect(() => {
-    dispatch(fetchCuratedPhotos({ page: currentPage, per_page: perPage }));
+    dispatch(fetchPopularVideos({ page: currentPage, per_page: perPage }));
   }, [dispatch, currentPage]);
 
   useEffect(() => {
-    if (initialPhotosData.photos) {
-      setPhotoData(prevData => [...prevData, ...initialPhotosData.photos]);
+    if (initialVideosData.videos) {
+      setVideosData(prevData => [...prevData, ...initialVideosData.videos]);
     }
-  }, [initialPhotosData]);
+  }, [initialVideosData]);
 
+  /* LOAD MORE && INFINITE SCROLL */
   useEffect(() => {
     const loadMore = () => {
       if (
@@ -53,33 +54,30 @@ const Photos = () => {
     };
   }, [currentPage, totalPages, isLoad]);
 
+  /* SCROLL TO TOP*/
   useEffect(() => {
     scrollToTop();
   }, []);
 
-  if (isPhotosLoading) {
-    return (
-      <div className='media-grid-skeleton'>
-        <Skeleton />
-      </div>
-    );
+  if (isVideosLoading) {
+    <div className='media-grid-skeleton'>
+      <Skeleton />
+    </div>;
   }
   return (
     <div className='container'>
-      <PageTitle title='Curated Photos' />
+      <PageTitle title='Popular Videos' />
 
       <div className='media-grid'>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 700: 3 }}>
           <Masonry columnsCount={2} gutter='10px'>
-            {photosData?.map((photo, index) => (
-              <PhotoCard key={index} itemData={photo} />
-            ))}
+            {videosData &&
+              videosData.map((video, index) => <VideoCard key={index} videoData={video} />)}
           </Masonry>
         </ResponsiveMasonry>
       </div>
-
       <div className='load-more' role='progressbar' ref={loader}></div>
     </div>
   );
 };
-export default Photos;
+export default Videos;

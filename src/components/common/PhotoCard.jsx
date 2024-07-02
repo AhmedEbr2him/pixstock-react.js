@@ -36,7 +36,7 @@ const PhotoCard = ({ itemData }) => {
           </button>
         </div>
 
-        <Link to={`${routeConstants.photos_detail}?id=${id}`} className='state-layer'></Link>
+        <Link to={`${routeConstants.photos_detail}/${id}`} className='state-layer'></Link>
       </div>
     )
   );

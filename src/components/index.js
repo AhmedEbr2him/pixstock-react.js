@@ -8,6 +8,7 @@ export { default as PhotoCard } from './common/PhotoCard';
 export { default as VideoCard } from './common/VideoCard';
 export { default as CollectionCard } from './common/CollectionCard';
 export { default as PageTitle } from './common/PageTitle';
+export { default as ThemeSwitch } from './common/ThemeSwitch';
 
 /* HEADER */
 export { default as SearchView } from './header/SearchView';
@@ -16,3 +17,4 @@ export { default as SearchList } from './header/SearchList';
 
 /* MAIN */
 export { default as Banner } from './home/Banner';
+export { default as DetailHeader } from './common/DetailHeader';
