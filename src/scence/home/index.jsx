@@ -17,6 +17,7 @@ import {
 } from '../../redux/slices/clientSlice';
 import { Link } from 'react-router-dom';
 import scrollToTop from '../../utils/scrollToTop';
+import Skeleton from '../../components/common/Skeleton';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -42,11 +43,18 @@ const Home = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
+
+  if (isPhotosLoading && isVideosLoading) {
+    return (
+      <div className='media-grid-skeleton'>
+        <Skeleton />
+      </div>
+    );
+  }
   return (
     <>
       <Banner />
 
-      {/* SECTIONS */}
       <section className='section featured-photos' aria-labelledby='featured-photos'>
         <div className='container'>
           <SectionTitle title='Featured Photos' id='section label' />

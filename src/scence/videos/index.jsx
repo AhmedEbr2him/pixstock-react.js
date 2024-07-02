@@ -4,7 +4,6 @@ import { fetchPopularVideos } from '../../redux/slices/clientSlice';
 import scrollToTop from '../../utils/scrollToTop';
 import { PageTitle, VideoCard } from '../../components';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import useInfinitieScroll from '../../hooks/useInfiniteScroll';
 import Skeleton from '../../components/common/Skeleton';
 const Videos = () => {
   const dispatch = useDispatch();
