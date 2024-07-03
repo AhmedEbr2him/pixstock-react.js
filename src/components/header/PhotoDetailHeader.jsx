@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import IconButton from '../common/IconButton';
 import { routeConstants } from '../../constants/routeConstants';
 import MaterialIcon from '../common/MaterialIcon';
-import { useThemeSwitch } from '../../hooks/useThemeSwitch';
 import { ThemeSwitch } from '..';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';

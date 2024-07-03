@@ -1,5 +1,5 @@
 import './videos.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchVideoDetail } from '../../redux/slices/clientSlice';

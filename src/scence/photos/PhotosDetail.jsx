@@ -14,10 +14,18 @@ const PhotosDetail = () => {
   const { id } = useParams();
   const photoDetailData = useSelector(state => state.clientReducer.client.photos.detail);
   const similarPhotosData = useSelector(state => state.clientReducer.client.photos.search);
-  const [photosData, setPhotoData] = useState([]);
   const isPhotoLoading = useSelector(
     state => state.clientReducer.isLoading.photos.fetchDetailPhoto
   );
+  const [photosData, setPhotoData] = useState([]);
+  const [photoDetail, setPhotoDetail] = useState({
+    alt: '',
+    avg_color: '',
+    height: '',
+    width: '',
+    photographer: '',
+    src: {},
+  });
 
   let perPage = 30;
   const detailImgRef = useRef(null);
@@ -26,12 +34,13 @@ const PhotosDetail = () => {
     dispatch(fetchPhotoDetail(id));
     setPhotoData([]); // Set the new photos data
     scrollToTop();
+    setPhotoDetail(photoDetailData);
 
     const handleLoad = () => {
       detailImgRef.current.animate(
         {
-          opacity: 1,
-          visbilisty: ['hidden', 'visible'],
+          opacity: [0, 1],
+          visibility: ['hidden', 'visible'],
         },
         {
           duration: 400,
@@ -51,21 +60,13 @@ const PhotosDetail = () => {
     };
   }, [id, dispatch]);
 
-  const [photoDetail, setPhotoDetail] = useState({
-    alt: '',
-    avg_color: '',
-    height: '',
-    width: '',
-    photographer: '',
-    src: {},
-  });
   const imgSrc = isPhotoLoading ? undefined : photoDetail.src?.large2x;
 
   useEffect(() => {
     if (similarPhotosData) {
       setPhotoDetail(photoDetailData);
     }
-  }, [photoDetailData, similarPhotosData, imgSrc]);
+  }, [photoDetailData, similarPhotosData]);
 
   /* SIMILAR PHOTOS */
   useEffect(() => {
@@ -81,7 +82,7 @@ const PhotosDetail = () => {
     if (similarPhotosData && similarPhotosData.photos) {
       setPhotoData(prevData => [...prevData, ...similarPhotosData.photos]);
     }
-  }, [similarPhotosData, id]);
+  }, [similarPhotosData]);
 
   return (
     <div className='detail'>
@@ -105,6 +106,7 @@ const PhotosDetail = () => {
               style={{ opacity: 0 }}
             />
           </figure>
+
           <p className='title-small'>
             Photograph by <span className='color-primary'>{photoDetail.photographer}</span>
           </p>
