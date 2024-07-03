@@ -51,6 +51,7 @@ const fetchVideos = {
   },
   detail: async (id, callback) => {
     requestUrl = `${root.videos}videos/${id}`;
+
     return fetchData(requestUrl, callback);
   },
 };

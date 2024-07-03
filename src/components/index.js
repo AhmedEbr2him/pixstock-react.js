@@ -17,4 +17,5 @@ export { default as SearchList } from './header/SearchList';
 
 /* MAIN */
 export { default as Banner } from './home/Banner';
-export { default as DetailHeader } from './common/DetailHeader';
+export { default as PhotoDetailHeader } from './header/PhotoDetailHeader';
+export { default as VideoDetailHeader } from './header/VideoDetailHeader';

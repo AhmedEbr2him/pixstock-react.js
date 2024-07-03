@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPhotoDetail, fetchSearchPhotos } from '../../redux/slices/clientSlice';
 import { useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import DetailHeader from '../../components/common/DetailHeader';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { PhotoCard } from '../../components';
 import scrollToTop from '../../utils/scrollToTop';
 import Skeleton from '../../components/common/Skeleton';
+import { handlePhotoDownloadData } from '../../redux/slices/mainSlice';
 
 const PhotosDetail = () => {
   const dispatch = useDispatch();
@@ -72,7 +72,10 @@ const PhotosDetail = () => {
     if (photoDetail.alt) {
       dispatch(fetchSearchPhotos({ query: photoDetail.alt, page: 2, per_page: perPage }));
     }
-  }, [photoDetail.alt, perPage, dispatch]);
+    if (photoDetail.src) {
+      dispatch(handlePhotoDownloadData(photoDetail.src));
+    }
+  }, [dispatch, photoDetail.alt, perPage, photoDetail.src]);
 
   useEffect(() => {
     if (similarPhotosData && similarPhotosData.photos) {
@@ -82,7 +85,6 @@ const PhotosDetail = () => {
 
   return (
     <div className='detail'>
-      {photoDetail.src && <DetailHeader downlaodData={photoDetail.src} />}
       <div className='container '>
         <div className='detail-wrapper'>
           <figure

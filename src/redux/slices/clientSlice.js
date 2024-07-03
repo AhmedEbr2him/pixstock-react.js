@@ -131,7 +131,7 @@ export const fetchPopularVideos = createAsyncThunk(
   }
 );
 export const fetchVideoDetail = createAsyncThunk(
-  'videos/fetch/videos/detail',
+  'videos/fetch/video/detail',
   async (videoId, thunkAPI) => {
     try {
       const response = await clientServices.fetchVideos.detail(videoId, data => data);
@@ -186,6 +186,7 @@ const clientSlice = createSlice({
       })
       .addCase(fetchSearchPhotos.fulfilled, (state, action) => {
         state.client.photos.search = action.payload;
+
         state.isLoading.photos.fetchSearchPhotos = false;
         state.isSuccess.photos.fetchSearchPhotos = true;
         state.isError.photos.fetchSearchPhotos = false;
@@ -220,6 +221,7 @@ const clientSlice = createSlice({
       })
       .addCase(fetchPhotoDetail.fulfilled, (state, action) => {
         state.client.photos.detail = action.payload;
+
         state.isLoading.photos.fetchDetailPhoto = false;
         state.isSuccess.photos.fetchDetailPhoto = true;
         state.isError.photos.fetchDetailPhoto = false;
@@ -271,7 +273,7 @@ const clientSlice = createSlice({
         state.isError.videos.fetchVideoDetail = false;
       })
       .addCase(fetchVideoDetail.fulfilled, (state, action) => {
-        state.client.videos.search = action.payload;
+        state.client.videos.detail = action.payload;
         state.isLoading.videos.fetchVideoDetail = false;
         state.isSuccess.videos.fetchVideoDetail = true;
         state.isError.videos.fetchVideoDetail = false;

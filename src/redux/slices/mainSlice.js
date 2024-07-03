@@ -4,6 +4,9 @@ const initialState = {
   isSearchViewOpen: JSON.parse(sessionStorage.getItem('searchViewState')) || false,
   searchInputValue: '',
   segmentValue: 'photos',
+  isDetailPage: false,
+  videoDownloadData: [],
+  photoDownloadData: [],
 };
 
 const mainSlice = createSlice({
@@ -24,9 +27,25 @@ const mainSlice = createSlice({
     getSegmentValue: (state, action) => {
       state.segmentValue = action.payload;
     },
+    handleIsDetailPage: (state, action) => {
+      state.isDetailPage = action.payload;
+    },
+    handlePhotoDownloadData: (state, action) => {
+      state.photoDownloadData = action.payload;
+    },
+    handleVideoDownloadData: (state, action) => {
+      state.videoDownloadData = action.payload;
+    },
   },
 });
 
 export default mainSlice.reducer;
-export const { toggleSearchView, toggleDrawer, getSearchValueInput, getSegmentValue } =
-  mainSlice.actions;
+export const {
+  toggleSearchView,
+  toggleDrawer,
+  getSearchValueInput,
+  getSegmentValue,
+  handleIsDetailPage,
+  handlePhotoDownloadData,
+  handleVideoDownloadData,
+} = mainSlice.actions;

@@ -1,16 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
-import IconButton from './IconButton';
+import IconButton from '../common/IconButton';
+import MaterialIcon from '../common/MaterialIcon';
+import ThemeSwitch from '../common/ThemeSwitch';
 import { routeConstants } from '../../constants/routeConstants';
-import MaterialIcon from './MaterialIcon';
-import { useThemeSwitch } from '../../hooks/useThemeSwitch';
-import { ThemeSwitch } from '../';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const DetailHeader = ({ downlaodData }) => {
-  const { changeTheme } = useThemeSwitch();
+const DetailVideoHeader = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-
   const navigate = useNavigate();
+  const videoDownloadData = useSelector(state => state.mainReducer.videoDownloadData);
+
   return (
     <header className='top-app-bar'>
       <IconButton
@@ -24,7 +24,7 @@ const DetailHeader = ({ downlaodData }) => {
 
       <div className='menu-wrapper'>
         <div className='split-btn'>
-          <Link to={downlaodData.original} className='label' download>
+          <Link to='' className='label' download>
             <span className='label-large'>Download</span>
             <div className='state-layer'></div>
           </Link>
@@ -36,12 +36,15 @@ const DetailHeader = ({ downlaodData }) => {
         </div>
 
         <div className={`menu ${isExpanded ? 'expanded' : ''}`}>
-          {Object.entries(downlaodData).map((item, index) => {
-            const [key, value] = item;
+          {videoDownloadData?.map((item, index) => {
+            const { width, height, quality, link } = item;
 
             return (
-              <Link key={index} to={value} download className='menu-item'>
-                {key}
+              <Link key={index} to={link} download className='menu-item'>
+                <span className='label-large text'>{quality.toUpperCase()}</span>
+                <span className='label-large trailing-text'>
+                  {width}x{height}
+                </span>
                 <div className='state-layer'></div>
               </Link>
             );
@@ -55,4 +58,4 @@ const DetailHeader = ({ downlaodData }) => {
     </header>
   );
 };
-export default DetailHeader;
+export default DetailVideoHeader;
