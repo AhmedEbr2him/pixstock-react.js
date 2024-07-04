@@ -1,61 +1,41 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { PageTitle, PhotoCard } from '../../components';
 import { fetchCuratedPhotos } from '../../redux/slices/clientSlice';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import scrollToTop from '../../utils/scrollToTop';
 import Skeleton from '../../components/common/Skeleton';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 const Photos = () => {
   const dispatch = useDispatch();
-  const initialPhotosData = useSelector(state => state.clientReducer.client.photos.curated);
+  const PhotosData = useSelector(state => state.clientReducer.client.photos.curated);
   const isPhotosLoading = useSelector(
     state => state.clientReducer.isLoading.photos.fetchCuratedPhotos
   );
 
-  const [photosData, setPhotoData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const loader = useRef(null);
-  const [isLoad, setIsLoad] = useState(true);
+  const [photosDataList, setPhotosDataList] = useState([]);
   let totalPages = 0;
   const perPage = 30;
-  totalPages = Math.ceil(initialPhotosData?.total_results / perPage);
+  totalPages = Math.ceil(PhotosData?.total_results / perPage);
+  const { loader, currentPage } = useInfiniteScroll({ totalPages, setPhotosDataList });
 
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
+  // Dispatches an action to fetch curated photos whenever the current page changes
   useEffect(() => {
     dispatch(fetchCuratedPhotos({ page: currentPage, per_page: perPage }));
   }, [dispatch, currentPage]);
 
   useEffect(() => {
-    if (initialPhotosData.photos) {
-      setPhotoData(prevData => [...prevData, ...initialPhotosData.photos]);
+    // Updates the photos list state with new photos data
+    // whenever photosData is updated
+    if (PhotosData.photos) {
+      setPhotosDataList(prevData => [...prevData, ...PhotosData.photos]);
     }
-  }, [initialPhotosData]);
-
-  useEffect(() => {
-    const loadMore = () => {
-      if (
-        loader.current &&
-        loader.current.getBoundingClientRect().top < window.innerHeight * 2 &&
-        currentPage <= totalPages &&
-        isLoad
-      ) {
-        setTimeout(() => {
-          setIsLoad(true);
-          setCurrentPage(prevPage => prevPage + 1);
-        }, 1500);
-        setIsLoad(false);
-      }
-    };
-    window.addEventListener('scroll', loadMore);
-
-    return () => {
-      window.removeEventListener('scroll', loadMore);
-    };
-  }, [currentPage, totalPages, isLoad]);
-
-  useEffect(() => {
-    scrollToTop();
-  }, []);
+  }, [PhotosData]);
 
   if (isPhotosLoading) {
     return (
@@ -71,7 +51,7 @@ const Photos = () => {
       <div className='media-grid'>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 700: 3 }}>
           <Masonry columnsCount={2} gutter='10px'>
-            {photosData?.map((photo, index) => (
+            {photosDataList?.map((photo, index) => (
               <PhotoCard key={index} itemData={photo} />
             ))}
           </Masonry>

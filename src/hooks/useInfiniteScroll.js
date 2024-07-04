@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useInfiniteScroll = ({ totalPages }) => {
+const useInfiniteScroll = ({ totalPages, setDataList }) => {
   const loader = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoad, setIsLoad] = useState(true);
+
   useEffect(() => {
     const loadMore = () => {
       if (
@@ -14,6 +15,7 @@ const useInfiniteScroll = ({ totalPages }) => {
         setTimeout(() => {
           setIsLoad(true);
           setCurrentPage(prevPage => prevPage + 1);
+          setDataList([]);
         }, 1500);
         setIsLoad(false);
       }
@@ -24,9 +26,9 @@ const useInfiniteScroll = ({ totalPages }) => {
     return () => {
       window.removeEventListener('scroll', loadMore);
     };
-  }, [currentPage, totalPages, isLoad, setIsLoad, setCurrentPage]);
+  }, [currentPage, totalPages, isLoad, setIsLoad, setCurrentPage, setDataList]);
 
-  return { loader };
+  return { loader, currentPage, isLoad };
 };
 
 export default useInfiniteScroll;

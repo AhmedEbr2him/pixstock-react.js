@@ -18,6 +18,8 @@ const PhotosDetail = () => {
     state => state.clientReducer.isLoading.photos.fetchDetailPhoto
   );
   const [photosData, setPhotoData] = useState([]);
+  let perPage = 30;
+  const detailImgRef = useRef(null);
   const [photoDetail, setPhotoDetail] = useState({
     alt: '',
     avg_color: '',
@@ -26,9 +28,7 @@ const PhotosDetail = () => {
     photographer: '',
     src: {},
   });
-
-  let perPage = 30;
-  const detailImgRef = useRef(null);
+  const imgSrc = isPhotoLoading ? undefined : photoDetail.src?.large2x;
 
   useEffect(() => {
     dispatch(fetchPhotoDetail(id));
@@ -36,6 +36,7 @@ const PhotosDetail = () => {
     scrollToTop();
     setPhotoDetail(photoDetailData);
 
+    // FADE UP ANIMATION SET ON IMAGE
     const handleLoad = () => {
       detailImgRef.current.animate(
         {
@@ -48,7 +49,6 @@ const PhotosDetail = () => {
         }
       );
     };
-
     const detailImgCurrent = detailImgRef.current;
     if (detailImgCurrent) {
       detailImgCurrent.addEventListener('load', handleLoad);
@@ -58,9 +58,8 @@ const PhotosDetail = () => {
         detailImgCurrent.removeEventListener('load', handleLoad);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch]);
-
-  const imgSrc = isPhotoLoading ? undefined : photoDetail.src?.large2x;
 
   useEffect(() => {
     if (similarPhotosData) {

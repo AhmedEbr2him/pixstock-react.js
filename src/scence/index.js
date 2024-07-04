@@ -9,3 +9,5 @@ export { default as Photos } from './photos/index';
 export { default as PhotosDetail } from './photos/PhotosDetail';
 export { default as Videos } from './videos/index';
 export { default as VideoDetail } from './videos/VideosDetails';
+export { default as Collections } from './collections/index';
+export { default as CollectionsDetail } from './collections/CollectionsDetail';

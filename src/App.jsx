@@ -1,5 +1,16 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { Drawer, Footer, Header, Home, Photos, PhotosDetail, VideoDetail, Videos } from './scence';
+import {
+  Collections,
+  CollectionsDetail,
+  Drawer,
+  Footer,
+  Header,
+  Home,
+  Photos,
+  PhotosDetail,
+  VideoDetail,
+  Videos,
+} from './scence';
 import { routeConstants } from './constants/routeConstants';
 import { useSelector } from 'react-redux';
 import { PhotoDetailHeader, VideoDetailHeader } from './components';
@@ -26,6 +37,11 @@ const App = () => {
             <Route path={`${routeConstants.photos_detail}/:id`} element={<PhotosDetail />} />
             <Route path={routeConstants.videos} element={<Videos />} />
             <Route path={`${routeConstants.videos_detail}/:id`} element={<VideoDetail />} />
+            <Route path={routeConstants.collections} element={<Collections />} />
+            <Route
+              path={`${routeConstants.collection_detail}/:id`}
+              element={<CollectionsDetail />}
+            />
           </Routes>
         </article>
       </main>
