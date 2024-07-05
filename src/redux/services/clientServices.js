@@ -62,7 +62,7 @@ const fetchCollection = {
     return fetchData(requestUrl, callback);
   },
   detail: async (id, parameters, callback) => {
-    requestUrl = `${root.default}collections/${id}?${urlEncode(parameters)}`;
+    requestUrl = `${root.default}collections/${id}?/${urlEncode(parameters)}`;
     return fetchData(requestUrl, callback);
   },
 };

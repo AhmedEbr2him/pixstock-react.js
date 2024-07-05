@@ -4,7 +4,6 @@ const useInfiniteScroll = ({ totalPages, setDataList }) => {
   const loader = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoad, setIsLoad] = useState(true);
-
   useEffect(() => {
     const loadMore = () => {
       if (

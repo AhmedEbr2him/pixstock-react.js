@@ -159,7 +159,7 @@ export const fetchCollectionDetail = createAsyncThunk(
   'collections/fetch/detail',
   async (collectionId, parameters, thunkAPI) => {
     try {
-      const response = await clientServices.fetchVideos.detail(
+      const response = await clientServices.fetchCollection.detail(
         collectionId,
         parameters,
         data => data
@@ -308,7 +308,7 @@ const clientSlice = createSlice({
         state.isError.collection.fetchCollectionDetail = false;
       })
       .addCase(fetchCollectionDetail.fulfilled, (state, action) => {
-        state.client.collections.featured = action.payload;
+        state.client.collections.detail = action.payload;
         state.isLoading.collection.fetchCollectionDetail = false;
         state.isSuccess.collection.fetchCollectionDetail = true;
         state.isError.collection.fetchCollectionDetail = false;

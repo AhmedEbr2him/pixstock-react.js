@@ -38,10 +38,7 @@ const App = () => {
             <Route path={routeConstants.videos} element={<Videos />} />
             <Route path={`${routeConstants.videos_detail}/:id`} element={<VideoDetail />} />
             <Route path={routeConstants.collections} element={<Collections />} />
-            <Route
-              path={`${routeConstants.collection_detail}/:id`}
-              element={<CollectionsDetail />}
-            />
+            <Route path={`${routeConstants.collection_detail}`} element={<CollectionsDetail />} />
           </Routes>
         </article>
       </main>
