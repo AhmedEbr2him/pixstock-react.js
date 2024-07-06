@@ -20,7 +20,7 @@ const CollectionsDetail = () => {
   const objectId = urlDecode(location.search.slice(1));
   const perPage = 30;
   const totalPages = Math.ceil(collectionDetail?.total_results / perPage);
-  const { loader, isLoad, currentPage } = useInfiniteScroll({
+  const { loader, currentPage } = useInfiniteScroll({
     totalPages,
   });
 
@@ -51,9 +51,9 @@ const CollectionsDetail = () => {
           <Masonry columnsCount={2} gutter='10px'>
             {collectionDetailDataList?.map((item, index) => {
               if (item.type === 'Photo') {
-                return <PhotoCard key={index} itemData={item} />;
+                return item && <PhotoCard key={index} photo={item} />;
               } else if (item.type === 'Video') {
-                return <VideoCard key={index} videoData={item} />;
+                return item && <VideoCard key={index} video={item} />;
               } else {
                 return null;
               }

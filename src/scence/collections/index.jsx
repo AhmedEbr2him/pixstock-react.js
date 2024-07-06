@@ -13,7 +13,6 @@ const Collections = () => {
   const perPage = 18;
   const totalPages = Math.ceil(collectionsData?.total_results / perPage);
   const { loader, currentPage } = useInfiniteScroll({ totalPages, setCollectionList });
-
   useEffect(() => {
     scrollToTop();
   }, []);

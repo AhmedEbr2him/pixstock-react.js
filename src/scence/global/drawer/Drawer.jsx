@@ -4,9 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { routeConstants } from '../../../constants/routeConstants';
 import { toggleDrawer } from '../../../redux/slices/mainSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRippleEffect } from '../../../hooks/useRippleEffect';
 const Drawer = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const { isDrawerOpen } = useSelector(state => state.mainReducer);
   const drawerItems = [
     { to: routeConstants.home, icon: 'home', label: 'Home' },
@@ -15,7 +15,7 @@ const Drawer = () => {
     { to: routeConstants.collections, icon: 'auto_awesome_mosaic', label: 'Collections' },
     { to: routeConstants.favorite, icon: 'favorite', label: 'Favorite' },
   ];
-
+  const { rippleElement } = useRippleEffect();
   return (
     <>
       <nav className={`navigation ${isDrawerOpen ? 'show' : ''}`}>
@@ -25,7 +25,9 @@ const Drawer = () => {
             icon='arrow_back'
             onClick={() => dispatch(toggleDrawer())}
           />
-          <Link to={routeConstants}>Pixstock</Link>
+          <Link to={routeConstants} className='logo'>
+            Pixstock
+          </Link>
         </div>
 
         <ul className='drawer-list'>
@@ -50,6 +52,8 @@ const Drawer = () => {
 };
 
 const DrawerItem = ({ icon, label, to, onClick }) => {
+  const location = useLocation();
+
   return (
     <li className='drawer-item' onClick={onClick}>
       <Link to={to} className={`drawer-link ${location.pathname === to ? 'active' : ''}`}>

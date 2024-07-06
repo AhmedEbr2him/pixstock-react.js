@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import { routeConstants } from '../../constants/routeConstants';
 import MaterialIcon from './MaterialIcon';
 import { useRippleEffect } from '../../hooks/useRippleEffect';
+import PropTypes from 'prop-types';
 
-const PhotoCard = ({ itemData }) => {
+const PhotoCard = ({ photo }) => {
   const {
     alt,
     avg_color: backgroundColor,
@@ -11,12 +12,12 @@ const PhotoCard = ({ itemData }) => {
     width,
     id,
     src: { large },
-  } = itemData;
+  } = photo;
   const favoritePhotos = JSON.parse(localStorage.getItem('favorite'));
   const { rippleElement } = useRippleEffect();
 
   return (
-    itemData && (
+    photo && (
       <div
         className='card grid-item'
         style={{ backgroundColor: backgroundColor }}
@@ -48,3 +49,7 @@ const PhotoCard = ({ itemData }) => {
   );
 };
 export default PhotoCard;
+
+PhotoCard.propTypes = {
+  photo: PropTypes.object,
+};

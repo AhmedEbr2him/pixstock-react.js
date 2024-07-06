@@ -117,7 +117,7 @@ const PhotosDetail = () => {
             {photoDetailData ? (
               <Masonry columnsCount={2} gutter='10px'>
                 {photosData?.map((photo, index) => (
-                  <PhotoCard key={index} itemData={photo} />
+                  <PhotoCard key={index} photo={photo} />
                 ))}
               </Masonry>
             ) : (

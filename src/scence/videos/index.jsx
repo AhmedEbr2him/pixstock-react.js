@@ -44,7 +44,7 @@ const Videos = () => {
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 700: 3 }}>
           <Masonry columnsCount={2} gutter='10px'>
             {videosDataList &&
-              videosDataList.map((video, index) => <VideoCard key={index} videoData={video} />)}
+              videosDataList.map((video, index) => <VideoCard key={index} video={video} />)}
           </Masonry>
         </ResponsiveMasonry>
       </div>

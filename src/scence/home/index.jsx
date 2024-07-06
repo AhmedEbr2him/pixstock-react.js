@@ -53,7 +53,7 @@ const Home = () => {
           <SectionTitle title='Featured Photos' id='section label' />
           <MediaGrid>
             {photosData?.photos &&
-              photosData?.photos?.map((photo, index) => <PhotoCard itemData={photo} key={index} />)}
+              photosData?.photos?.map((photo, index) => <PhotoCard photo={photo} key={index} />)}
           </MediaGrid>
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>
@@ -64,9 +64,7 @@ const Home = () => {
           <SectionTitle title='Featured Videos' id='section label' />
           <MediaGrid>
             {videosData?.videos &&
-              videosData?.videos?.map((video, index) => (
-                <VideoCard videoData={video} key={index} />
-              ))}
+              videosData?.videos?.map((video, index) => <VideoCard video={video} key={index} />)}
           </MediaGrid>
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>

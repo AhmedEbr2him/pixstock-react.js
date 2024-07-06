@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import MaterialIcon from './MaterialIcon';
 import { routeConstants } from '../../constants/routeConstants';
 import { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
-const VideoCard = ({ videoData }) => {
+const VideoCard = ({ video }) => {
   const [videoUsageData, setVideoUsageData] = useState({
     height: '',
     width: '',
@@ -13,8 +14,7 @@ const VideoCard = ({ videoData }) => {
   });
 
   const sdVideo =
-    videoData &&
-    videoUsageData?.video_files?.find(item => item.quality === 'sd' && item.width < 1000);
+    video && videoUsageData?.video_files?.find(item => item.quality === 'sd' && item.width < 1000);
 
   const [videoSrc, setVideoSrc] = useState({ file_type: '', link: '' });
 
@@ -24,10 +24,10 @@ const VideoCard = ({ videoData }) => {
   let playTimeOut = useRef(null);
 
   useState(() => {
-    if (videoData) {
-      setVideoUsageData(videoData);
+    if (video) {
+      setVideoUsageData(video);
     }
-  }, [videoData]);
+  }, [video]);
 
   useEffect(() => {
     if (sdVideo) {
@@ -99,3 +99,7 @@ const VideoCard = ({ videoData }) => {
   );
 };
 export default VideoCard;
+
+VideoCard.propTypes = {
+  video: PropTypes.object,
+};
