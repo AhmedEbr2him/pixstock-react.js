@@ -37,13 +37,6 @@ const Photos = () => {
     }
   }, [PhotosData]);
 
-  if (isPhotosLoading) {
-    return (
-      <div className='media-grid-skeleton'>
-        <Skeleton />
-      </div>
-    );
-  }
   return (
     <div className='container'>
       <PageTitle title='Curated Photos' />
@@ -57,7 +50,7 @@ const Photos = () => {
           </Masonry>
         </ResponsiveMasonry>
       </div>
-
+      {isPhotosLoading && <Skeleton />}
       <div className='load-more' role='progressbar' ref={loader}></div>
     </div>
   );

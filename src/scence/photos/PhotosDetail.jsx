@@ -28,7 +28,7 @@ const PhotosDetail = () => {
     photographer: '',
     src: {},
   });
-  const imgSrc = isPhotoLoading ? undefined : photoDetail.src?.large2x;
+  const imgSrc = isPhotoLoading ? undefined : photoDetail?.src?.large2x;
 
   useEffect(() => {
     dispatch(fetchPhotoDetail(id));
@@ -78,7 +78,7 @@ const PhotosDetail = () => {
   }, [dispatch, photoDetail.alt, perPage, photoDetail.src]);
 
   useEffect(() => {
-    if (similarPhotosData && similarPhotosData.photos) {
+    if (similarPhotosData && similarPhotosData?.photos) {
       setPhotoData(prevData => [...prevData, ...similarPhotosData.photos]);
     }
   }, [similarPhotosData]);
@@ -90,8 +90,8 @@ const PhotosDetail = () => {
           <figure
             className='detail-banner img-holder'
             style={{
-              aspectRatio: `${photoDetail.width}/${photoDetail.height}`,
-              backgroundColor: photoDetail.avg_color,
+              aspectRatio: `${photoDetail?.width}/${photoDetail?.height}`,
+              backgroundColor: photoDetail?.avg_color,
             }}
           >
             <img
@@ -125,7 +125,8 @@ const PhotosDetail = () => {
             )}
           </ResponsiveMasonry>
         </div>
-        {similarPhotosData.photos && <div className='load-more' role='progressbar'></div>}
+        {isPhotoLoading && <Skeleton />}
+        {similarPhotosData?.photos && <div className='load-more' role='progressbar'></div>}
       </div>
     </div>
   );

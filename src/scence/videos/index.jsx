@@ -36,11 +36,6 @@ const Videos = () => {
     scrollToTop();
   }, []);
 
-  if (isVideosLoading) {
-    <div className='media-grid-skeleton'>
-      <Skeleton />
-    </div>;
-  }
   return (
     <div className='container'>
       <PageTitle title='Popular Videos' />
@@ -53,6 +48,7 @@ const Videos = () => {
           </Masonry>
         </ResponsiveMasonry>
       </div>
+      {isVideosLoading && <Skeleton />}
       <div className='load-more' role='progressbar' ref={loader}></div>
     </div>
   );

@@ -6,18 +6,22 @@ import { urlDecode } from '../../utils/urlDecode';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 import { PageTitle, PhotoCard, VideoCard } from '../../components';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import Skeleton from '../../components/common/Skeleton';
 
 const CollectionsDetail = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const collectionDetail = useSelector(state => state.clientReducer.client.collections.detail);
+  const isCollectionDetailLoading = useSelector(
+    state => state.clientReducer.isLoading.collection.fetchCollectionDetail
+  );
+
   const [collectionDetailDataList, setCollectionDetailDataList] = useState([]);
   const objectId = urlDecode(location.search.slice(1));
   const perPage = 30;
   const totalPages = Math.ceil(collectionDetail?.total_results / perPage);
-  const { loader, currentPage } = useInfiniteScroll({
+  const { loader, isLoad, currentPage } = useInfiniteScroll({
     totalPages,
-    setDataList: setCollectionDetailDataList,
   });
 
   // Dispatches an action to fetch  collections detail whenever the current page changes
@@ -30,10 +34,14 @@ const CollectionsDetail = () => {
   useEffect(() => {
     // Updates the collection data list state with new collection data
     // whenever collectionDetail is updated
-    if (collectionDetail.media) {
+    if (collectionDetail?.media) {
       setCollectionDetailDataList(prevData => [...prevData, ...collectionDetail.media]);
     }
   }, [collectionDetail]);
+  // RE RENDER SET COLLECTION DATA DETAIL LIST WHEN THE SEARCH IS UPDATED
+  useEffect(() => {
+    setCollectionDetailDataList([]);
+  }, [location.search]);
 
   return (
     <div className='container'>
@@ -53,6 +61,7 @@ const CollectionsDetail = () => {
           </Masonry>
         </ResponsiveMasonry>
       </div>
+      {isCollectionDetailLoading && <Skeleton />}
       <div className='load-more' ref={loader}></div>
     </div>
   );

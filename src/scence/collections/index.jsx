@@ -1,3 +1,4 @@
+import './collection.css';
 import { useEffect, useState } from 'react';
 import { CollectionCard, PageTitle } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';

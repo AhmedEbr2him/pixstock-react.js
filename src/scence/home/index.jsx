@@ -30,9 +30,9 @@ const Home = () => {
   const isVideosLoading = useSelector(
     state => state.clientReducer.isLoading.videos.fetchPopularVideos
   );
-  const isCollectionsLoading = useSelector(
-    state => state.clientReducer.isLoading.collection.fetchFeaturedCollections
-  );
+  // const isCollectionsLoading = useSelector(
+  //   state => state.clientReducer.isLoading.collection.fetchFeaturedCollections
+  // );
 
   useEffect(() => {
     dispatch(fetchCuratedPhotos({ page: 1, per_page: 15 }));
@@ -45,11 +45,7 @@ const Home = () => {
   }, []);
 
   if (isPhotosLoading && isVideosLoading) {
-    return (
-      <div className='media-grid-skeleton'>
-        <Skeleton />
-      </div>
-    );
+    return <Skeleton />;
   }
   return (
     <>

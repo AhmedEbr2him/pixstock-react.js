@@ -1,0 +1,14 @@
+/*-----------------------------------*\
+  #COLLECTION
+\*-----------------------------------*/
+.grid-card .label {
+  color: var(--on-surface-variant);
+}
+
+.collection-grid .list-item {
+  border-block-end: 1px solid var(--outline-variant);
+}
+.collection .btn {
+  margin-block: 12px;
+  margin-inline: auto;
+}
