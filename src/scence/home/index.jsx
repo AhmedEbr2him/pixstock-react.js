@@ -21,9 +21,9 @@ import Skeleton from '../../components/common/Skeleton';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const photosData = useSelector(state => state.clientReducer.client.photos.curated);
-  const videosData = useSelector(state => state.clientReducer.client.videos.popular);
-  const collectionsData = useSelector(state => state.clientReducer.client.collections.featured);
+  const photosData = useSelector(state => state?.clientReducer?.client?.photos.curated);
+  const videosData = useSelector(state => state?.clientReducer?.client?.videos.popular);
+  const collectionsData = useSelector(state => state?.clientReducer?.client?.collections.featured);
   const isPhotosLoading = useSelector(
     state => state.clientReducer.isLoading.photos.fetchCuratedPhotos
   );
@@ -38,11 +38,8 @@ const Home = () => {
     dispatch(fetchCuratedPhotos({ page: 1, per_page: 15 }));
     dispatch(fetchPopularVideos({ page: 2, per_page: 15 }));
     dispatch(fetchFeaturedCollections({ page: 2, per_page: 18 }));
-  }, [dispatch]);
-
-  useEffect(() => {
     scrollToTop();
-  }, []);
+  }, [dispatch]);
 
   if (isPhotosLoading && isVideosLoading) {
     return <Skeleton />;
@@ -55,8 +52,8 @@ const Home = () => {
         <div className='container'>
           <SectionTitle title='Featured Photos' id='section label' />
           <MediaGrid>
-            {photosData.photos &&
-              photosData.photos.map((photo, index) => <PhotoCard itemData={photo} key={index} />)}
+            {photosData?.photos &&
+              photosData?.photos?.map((photo, index) => <PhotoCard itemData={photo} key={index} />)}
           </MediaGrid>
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>
@@ -66,8 +63,10 @@ const Home = () => {
         <div className='container'>
           <SectionTitle title='Featured Videos' id='section label' />
           <MediaGrid>
-            {videosData.videos &&
-              videosData.videos.map((video, index) => <VideoCard videoData={video} key={index} />)}
+            {videosData?.videos &&
+              videosData?.videos?.map((video, index) => (
+                <VideoCard videoData={video} key={index} />
+              ))}
           </MediaGrid>
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>
@@ -77,9 +76,10 @@ const Home = () => {
         <div className='container'>
           <SectionTitle title='Featured Collections' id='section label' />
           <div className='collection-grid'>
-            {collectionsData?.collections?.map((collection, index) => (
-              <CollectionCard data={collection} key={index} />
-            ))}
+            {collectionsData?.collections &&
+              collectionsData?.collections?.map((collection, index) => (
+                <CollectionCard data={collection} key={index} />
+              ))}
           </div>
           <Link to={routeConstants.collections} className='btn btn-primary'>
             <span className='label-large text'>More Collection</span>

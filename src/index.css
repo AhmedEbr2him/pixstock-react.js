@@ -399,14 +399,14 @@ button:disabled {
   transform-origin: center;
   border-radius: var(--radius-circle);
   opacity: 0.12;
-  animation: ripple 800ms var(--motion-easing-standard) forwards;
+  animation: ripple 2000ms var(--motion-easing-standard) forwards;
 }
 @keyframes ripple {
   0% {
     scale: 0;
   }
   100% {
-    scale: 2.5;
+    scale: 5;
   }
 }
 

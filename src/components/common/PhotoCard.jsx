@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { routeConstants } from '../../constants/routeConstants';
 import MaterialIcon from './MaterialIcon';
+import { useRippleEffect } from '../../hooks/useRippleEffect';
 
 const PhotoCard = ({ itemData }) => {
   const {
@@ -12,10 +13,15 @@ const PhotoCard = ({ itemData }) => {
     src: { large },
   } = itemData;
   const favoritePhotos = JSON.parse(localStorage.getItem('favorite'));
+  const { rippleElement } = useRippleEffect();
 
   return (
     itemData && (
-      <div className='card grid-item' style={{ backgroundColor: backgroundColor }}>
+      <div
+        className='card grid-item'
+        style={{ backgroundColor: backgroundColor }}
+        ref={rippleElement}
+      >
         <figure className='card-banner' style={{ '--width': width, '--height': height }}>
           <img
             src={large}

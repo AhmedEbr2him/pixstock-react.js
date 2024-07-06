@@ -1,5 +1,5 @@
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-
+import PropTypes from 'prop-types';
 const MediaGrid = ({ children }) => {
   return (
     <>
@@ -13,4 +13,9 @@ const MediaGrid = ({ children }) => {
     </>
   );
 };
+
 export default MediaGrid;
+
+MediaGrid.propTypes = {
+  children: PropTypes.node,
+};
