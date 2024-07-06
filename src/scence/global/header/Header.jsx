@@ -4,14 +4,27 @@ import { IconButton, SearchView, ThemeSwitch } from '../../../components';
 import { routeConstants } from '../../../constants/routeConstants';
 import { useDispatch } from 'react-redux';
 import { toggleSearchView, toggleDrawer } from '../../../redux/slices/mainSlice';
-import { useThemeSwitch } from '../../../hooks/useThemeSwitch';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { changeTheme } = useThemeSwitch();
+  const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    const handleHeaderScroll = () => {
+      if (window.scrollY >= 150) {
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+      }
+    };
+    window.addEventListener('scroll', handleHeaderScroll);
 
+    return () => {
+      window.removeEventListener('scroll', handleHeaderScroll);
+    };
+  }, [isActive]);
   return (
-    <header className='top-app-bar'>
+    <header className={`top-app-bar ${isActive ? 'active' : ''}`}>
       <IconButton ariaLabel='Open menu' icon={'menu'} onClick={() => dispatch(toggleDrawer())} />
       <Link to={routeConstants.home} className='logo'>
         Pixstock
