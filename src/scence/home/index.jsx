@@ -1,12 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Banner,
-  CollectionCard,
-  MediaGrid,
-  PhotoCard,
-  SectionTitle,
-  VideoCard,
-} from '../../components';
+import { Banner, CollectionCard, PhotoCard, SectionTitle, VideoCard } from '../../components';
 import OverlayBtn from '../../components/common/OverlayBtn';
 import { routeConstants } from '../../constants/routeConstants';
 import { useEffect } from 'react';
@@ -18,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import scrollToTop from '../../utils/scrollToTop';
 import Skeleton from '../../components/common/Skeleton';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -51,10 +45,13 @@ const Home = () => {
       <section className='section featured-photos' aria-labelledby='featured-photos'>
         <div className='container'>
           <SectionTitle title='Featured Photos' id='section label' />
-          <MediaGrid>
-            {photosData?.photos &&
-              photosData?.photos?.map((photo, index) => <PhotoCard photo={photo} key={index} />)}
-          </MediaGrid>
+          <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 700: 3 }}>
+            <Masonry columnsCount={2} gutter='10px'>
+              {photosData?.photos &&
+                photosData?.photos?.map((photo, index) => <PhotoCard photo={photo} key={index} />)}
+            </Masonry>
+          </ResponsiveMasonry>
+
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>
       </section>
@@ -62,10 +59,13 @@ const Home = () => {
       <section className='section popular-videos' aria-labelledby='popular-videos'>
         <div className='container'>
           <SectionTitle title='Featured Videos' id='section label' />
-          <MediaGrid>
-            {videosData?.videos &&
-              videosData?.videos?.map((video, index) => <VideoCard video={video} key={index} />)}
-          </MediaGrid>
+          <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 700: 3 }}>
+            <Masonry columnsCount={2} gutter='10px'>
+              {videosData?.videos &&
+                videosData?.videos?.map((video, index) => <VideoCard video={video} key={index} />)}
+            </Masonry>
+          </ResponsiveMasonry>
+
           <OverlayBtn to={routeConstants.photos} text={'Explore More'} />
         </div>
       </section>

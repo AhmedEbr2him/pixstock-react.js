@@ -8,9 +8,10 @@ const SearchView = () => {
   const dispatch = useDispatch();
   const inputRefValue = useRef(null);
   const { isSearchViewOpen, searchInputValue } = useSelector(state => state.mainReducer);
-  const [searchHistory, setSearchHistory] = useState(
-    JSON.parse(localStorage.getItem('search_history') || { items: [] })
-  );
+  const [searchHistory, setSearchHistory] = useState(() => {
+    const searchView = JSON.parse(localStorage.getItem('search_history'));
+    return searchView ?? { items: [] };
+  });
 
   /* SEARCH HISTORY FUNCTION */
   const updateSearchHistory = searchValue => {
@@ -24,7 +25,7 @@ const SearchView = () => {
   };
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('search_history'))) {
+    if (localStorage.getItem('search_history')) {
       setSearchHistory(JSON.parse(localStorage.getItem('search_history')));
     } else {
       localStorage.setItem('search_history', JSON.stringify(searchHistory));

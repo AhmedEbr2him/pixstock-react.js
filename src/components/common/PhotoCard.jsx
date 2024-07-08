@@ -3,6 +3,7 @@ import { routeConstants } from '../../constants/routeConstants';
 import MaterialIcon from './MaterialIcon';
 import { useRippleEffect } from '../../hooks/useRippleEffect';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 const PhotoCard = ({ photo }) => {
   const {
@@ -13,8 +14,23 @@ const PhotoCard = ({ photo }) => {
     id,
     src: { large },
   } = photo;
-  const favoritePhotos = JSON.parse(localStorage.getItem('favorite'));
+
   const { rippleElement } = useRippleEffect();
+  const [favoriteObj, setFavoriteObj] = useState(
+    JSON.parse(localStorage.getItem('favorite')) ?? {
+      photos: {},
+      videos: {},
+    }
+  );
+  const [isActive, setIsActive] = useState(false);
+  const [isdisabled, setIsDisabled] = useState(false);
+  const addToFavorite = () => {
+    if (!favoriteObj.photos[id]) {
+    }
+  };
+  useEffect(() => {
+    localStorage.setItem('favorite', JSON.stringify(favoriteObj));
+  }, [favoriteObj]);
 
   return (
     photo && (
@@ -34,10 +50,7 @@ const PhotoCard = ({ photo }) => {
           />
         </figure>
         <div className='card-content'>
-          <button
-            aria-label='Add to favorite'
-            className={`icon-btn small ${favoritePhotos?.photos[id] ? 'active' : ''}`}
-          >
+          <button aria-label='Add to favorite' className={`icon-btn small`} onClick={addToFavorite}>
             <MaterialIcon icon={'favorite'} />
             <div className='state-layer'></div>
           </button>
