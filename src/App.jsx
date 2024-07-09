@@ -3,6 +3,7 @@ import {
   Collections,
   CollectionsDetail,
   Drawer,
+  Favorite,
   Footer,
   Header,
   Home,
@@ -39,6 +40,7 @@ const App = () => {
             <Route path={`${routeConstants.videos_detail}/:id`} element={<VideoDetail />} />
             <Route path={routeConstants.collections} element={<Collections />} />
             <Route path={`${routeConstants.collection_detail}`} element={<CollectionsDetail />} />
+            <Route path={`${routeConstants.favorite}`} element={<Favorite />} />
           </Routes>
         </article>
       </main>

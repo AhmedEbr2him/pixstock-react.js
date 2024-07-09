@@ -645,6 +645,38 @@ button:disabled {
   font-size: 1.8rem;
 }
 
+/*
+ * Segment button
+ */
+.btn-segment {
+  color: var(--on-surface);
+  --state-layer-bg: var(--on-surface);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 12px;
+  height: 40px;
+  flex-grow: 1;
+}
+.btn-segment .material-symbols-outlined {
+  font-size: 1.8rem;
+}
+.btn-group .btn-segment:not(:last-child) {
+  border-inline-end: 1px solid var(--outline);
+}
+.btn-group {
+  display: flex;
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.btn-segment.selected {
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+  --state-layer-bg: var(--on-secondary-container);
+}
+
 /*-----------------------------------*\
   #SCRIM
 \*-----------------------------------*/

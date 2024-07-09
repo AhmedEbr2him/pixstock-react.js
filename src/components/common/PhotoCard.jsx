@@ -15,6 +15,7 @@ const PhotoCard = ({ photo }) => {
     id: '',
     src: {},
   });
+
   useEffect(() => {
     photo && setPhotoData(photo);
   }, [photo]);

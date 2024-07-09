@@ -11,3 +11,4 @@ export { default as Videos } from './videos/index';
 export { default as VideoDetail } from './videos/VideosDetails';
 export { default as Collections } from './collections/index';
 export { default as CollectionsDetail } from './collections/CollectionsDetail';
+export { default as Favorite } from './favorite/index';
