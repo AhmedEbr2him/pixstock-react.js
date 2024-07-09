@@ -1,3 +1,4 @@
+import { useRippleEffect } from '../../hooks/useRippleEffect';
 import MaterialIcon from '../common/MaterialIcon';
 import PropTypes from 'prop-types';
 
@@ -11,10 +12,18 @@ const SearchList = ({ searchHistory, setSearchHistory }) => {
     setSearchHistory(updateHistory);
     localStorage.setItem('search_history', JSON.stringify(updateHistory));
   };
+  const { rippleElement } = useRippleEffect();
+
   return (
     <div className='list'>
       {searchHistory?.items?.slice(0, 5).map((item, index) => (
-        <button key={index} type='button' aria-label='search history item' className='list-item'>
+        <button
+          key={index}
+          type='button'
+          aria-label='search history item'
+          className='list-item'
+          ref={rippleElement}
+        >
           <MaterialIcon icon={'history'} />
           <span className='body-large text'>{item}</span>
           <span className='remove-item label-medium' onClick={() => removeItem(index)}>

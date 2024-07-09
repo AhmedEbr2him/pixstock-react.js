@@ -10,9 +10,15 @@ const Footer = () => {
           <div className='col'>
             <Link to={routeConstants.home}>Pixstock</Link>
             <div className='text body-small'>
-              Pixstock is a stock photo app developed by
-              <span className='color-primary'>&nbsp;ahmedebrahim</span> and all Photos and Videos
-              provided by
+              Pixstock is a stock photo app developed by&nbsp;
+              <Link to='https://github.com/AhmedEbr2him' className='color-primary'>
+                ahmedebrahim
+              </Link>
+              &nbsp;and thanks for
+              <Link to='https://github.com/codewithsadee' className='color-primary'>
+                codewithsadee
+              </Link>
+              &nbsp;and all Photos and Videos provided by&nbsp;
               <Link to='https://pexels.com'>Pexels</Link>.
             </div>
           </div>
@@ -23,7 +29,7 @@ const Footer = () => {
               <Link to='#' className='label-small color-primary'>
                 Youtube&nbsp;
               </Link>
-              <Link to='#' className='label-small color-primary'>
+              <Link to='https://github.com/AhmedEbr2him' className='label-small color-primary'>
                 Github&nbsp;
               </Link>
               <Link to='#' className='label-small color-primary'>

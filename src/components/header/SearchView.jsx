@@ -93,7 +93,11 @@ const SearchView = () => {
         <div className='state-layer'></div>
       </div>
 
-      <SearchViewContent dispatch={dispatch} />
+      <SearchViewContent
+        dispatch={dispatch}
+        searchHistory={searchHistory}
+        setSearchHistory={setSearchHistory}
+      />
     </div>
   );
 };
