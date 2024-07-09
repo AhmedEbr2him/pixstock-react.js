@@ -135,3 +135,36 @@
   background-color: var(--on-tertiary-container);
   box-shadow: 0 2px 2px -1px #410006;
 }
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+/**
+  * Responsive for larger than 600px screen
+*/
+@media only screen and (min-width: 600px) {
+  /**
+    * Banner
+  */
+  .banner-card {
+    --gradient-direction: 270deg;
+  }
+  .banner-card .card-content {
+    left: 32%;
+    bottom: -16px;
+  }
+}
+/**
+  * Responsive for larger than  900px screen
+*/
+@media only screen and (min-width: 900px) {
+  /**
+  * BANNER
+  */
+  .banner-card .card-content {
+    padding: 32px;
+  }
+  .banner-card .card-text {
+    display: block;
+    max-width: 40%;
+  }
+}

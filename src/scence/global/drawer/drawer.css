@@ -61,3 +61,31 @@
 .drawer-link.active .leading-icon {
   font-variation-settings: 'FILL' 1;
 }
+/**
+  * Responsive for larger than  1240px screen
+*/
+@media only screen and (min-width: 1240px) {
+  .navigation {
+    --navigation-drawer-width: 360px;
+    visibility: visible;
+    width: var(--navigation-drawer-width);
+    border-radius: 0;
+  }
+  .navigation :where(.navigation-header, .drawer-list) {
+    opacity: 1;
+  }
+  .navigation-header {
+    height: 64px;
+    padding-inline: 28px;
+  }
+  .navigation-header .icon-btn {
+    display: none;
+  }
+
+  .banner-card {
+    height: 420px;
+  }
+  .banner-card .card-content {
+    padding: 48px;
+  }
+}

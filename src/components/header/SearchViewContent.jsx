@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getSegmentValue } from '../../redux/slices/mainSlice';
+import SearchList from './SearchList';
+import PropTypes from 'prop-types';
 
 const SearchViewContent = ({ dispatch }) => {
   const location = useLocation();
   const { segmentValue } = useSelector(state => state.mainReducer);
   const [segmentSelected, setSegmentSelected] = useState(segmentValue);
-
+  const [searchHistory, setSearchHistory] = useState(() => {
+    const searchView = JSON.parse(localStorage.getItem('search_history'));
+    return searchView ?? { items: [] };
+  });
   const handleSegmentButton = e => {
     const value = e.currentTarget.dataset.segment_value;
     //  const value = e.currentTarget.getAttribute('data-segment_value');
@@ -56,7 +61,11 @@ const SearchViewContent = ({ dispatch }) => {
         </button>
       </div>
       <div className='divider'></div>
+      <SearchList searchHistory={searchHistory} setSearchHistory={setSearchHistory} />
     </div>
   );
 };
 export default SearchViewContent;
+SearchViewContent.propTypes = {
+  dispatch: PropTypes.func,
+};

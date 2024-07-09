@@ -1,3 +1,4 @@
+import './home.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Banner, CollectionCard, PhotoCard, SectionTitle, VideoCard } from '../../components';
 import OverlayBtn from '../../components/common/OverlayBtn';

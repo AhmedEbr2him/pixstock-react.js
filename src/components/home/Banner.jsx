@@ -1,4 +1,3 @@
-import './home.css';
 import { routeConstants } from '../../constants/routeConstants';
 import { media } from '../../assets/media';
 import { LinkBtn } from '../';

@@ -1,4 +1,5 @@
 import MaterialIcon from '../common/MaterialIcon';
+import PropTypes from 'prop-types';
 
 const SearchList = ({ searchHistory, setSearchHistory }) => {
   const removeItem = removedIndex => {
@@ -26,3 +27,7 @@ const SearchList = ({ searchHistory, setSearchHistory }) => {
   );
 };
 export default SearchList;
+SearchList.propTypes = {
+  searchHistory: PropTypes.object,
+  setSearchHistory: PropTypes.func,
+};

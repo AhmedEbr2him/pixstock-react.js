@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '../common/IconButton';
 import { toggleSearchView, getSearchValueInput } from '../../redux/slices/mainSlice';
-import { SearchList, SearchViewContent } from '../index';
+import { SearchViewContent } from '../index';
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -30,6 +30,7 @@ const SearchView = () => {
     } else {
       localStorage.setItem('search_history', JSON.stringify(searchHistory));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setSearchHistory]);
 
   const handleDeleteSearchValue = () => {
@@ -93,7 +94,6 @@ const SearchView = () => {
       </div>
 
       <SearchViewContent dispatch={dispatch} />
-      <SearchList searchHistory={searchHistory} setSearchHistory={setSearchHistory} />
     </div>
   );
 };

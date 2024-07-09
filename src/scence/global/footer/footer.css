@@ -24,3 +24,18 @@
 .footer-card .title {
   margin-block-end: 4px;
 }
+/**
+  * Responsive for larger than  900px screen
+*/
+
+@media only screen and (min-width: 900px) {
+  .footer-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: flex-end;
+  }
+  .footer-card .text {
+    margin-block-end: 4px;
+  }
+}
