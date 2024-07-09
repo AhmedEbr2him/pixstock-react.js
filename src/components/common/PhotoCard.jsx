@@ -3,7 +3,6 @@ import { routeConstants } from '../../constants/routeConstants';
 import MaterialIcon from './MaterialIcon';
 import { useRippleEffect } from '../../hooks/useRippleEffect';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import useAddToFavorite from '../../hooks/useAddToFavorite';
 
 const PhotoCard = ({ photo }) => {
@@ -18,7 +17,7 @@ const PhotoCard = ({ photo }) => {
 
   const { rippleElement } = useRippleEffect();
 
-  const { addToFavorite, isDisabled, favoriteObj } = useAddToFavorite();
+  const { addToFavorite, favoriteObj } = useAddToFavorite();
 
   //   const storedFavorites = JSON.parse(localStorage.getItem('favorite')) ?? {
   //     photos: {},

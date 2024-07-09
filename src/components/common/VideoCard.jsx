@@ -3,6 +3,7 @@ import MaterialIcon from './MaterialIcon';
 import { routeConstants } from '../../constants/routeConstants';
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import useAddToFavorite from '../../hooks/useAddToFavorite';
 
 const VideoCard = ({ video }) => {
   const [videoUsageData, setVideoUsageData] = useState({
@@ -18,11 +19,10 @@ const VideoCard = ({ video }) => {
 
   const [videoSrc, setVideoSrc] = useState({ file_type: '', link: '' });
 
-  const favoriteObj = JSON.parse(localStorage.getItem('favorite'));
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
   let playTimeOut = useRef(null);
-
+  const { favoriteObj, addToFavorite } = useAddToFavorite();
   useState(() => {
     if (video) {
       setVideoUsageData(video);
@@ -82,6 +82,7 @@ const VideoCard = ({ video }) => {
         <button
           aria-label='Add to favorite button'
           className={`icon-btn small ${favoriteObj?.videos[videoUsageData.id] ? 'active' : ''}`}
+          onClick={() => addToFavorite('videos', videoUsageData.id, videoUsageData)}
         >
           <MaterialIcon icon='favorite' />
           <div className='state-layer'></div>
