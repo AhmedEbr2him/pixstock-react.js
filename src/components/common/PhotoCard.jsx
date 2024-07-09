@@ -4,6 +4,7 @@ import MaterialIcon from './MaterialIcon';
 import { useRippleEffect } from '../../hooks/useRippleEffect';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import useAddToFavorite from '../../hooks/useAddToFavorite';
 
 const PhotoCard = ({ photo }) => {
   const {
@@ -16,22 +17,27 @@ const PhotoCard = ({ photo }) => {
   } = photo;
 
   const { rippleElement } = useRippleEffect();
-  const [favoriteObj, setFavoriteObj] = useState(
-    JSON.parse(localStorage.getItem('favorite')) ?? {
-      photos: {},
-      videos: {},
-    }
-  );
-  const [isActive, setIsActive] = useState(false);
-  const [isdisabled, setIsDisabled] = useState(false);
-  const addToFavorite = () => {
-    if (!favoriteObj.photos[id]) {
-    }
-  };
-  useEffect(() => {
-    localStorage.setItem('favorite', JSON.stringify(favoriteObj));
-  }, [favoriteObj]);
 
+  const { addToFavorite, isDisabled, favoriteObj } = useAddToFavorite();
+
+  //   const storedFavorites = JSON.parse(localStorage.getItem('favorite')) ?? {
+  //     photos: {},
+  //     videos: {},
+  //   };
+
+  //   if (storedFavorites[type][id]) {
+  //     delete storedFavorites[type][id];
+  //     setIsDisabled(true);
+  //   } else {
+  //     storedFavorites[type][id] = data;
+  //     setIsDisabled(true);
+  //   }
+  //   setFavoriteObj(storedFavorites);
+  //   localStorage.setItem('favorite', JSON.stringify(storedFavorites));
+  // };
+  // useEffect(() => {
+  //   localStorage.setItem('favorite', JSON.stringify(favoriteObj));
+  // }, [favoriteObj]);
   return (
     photo && (
       <div
@@ -50,7 +56,11 @@ const PhotoCard = ({ photo }) => {
           />
         </figure>
         <div className='card-content'>
-          <button aria-label='Add to favorite' className={`icon-btn small`} onClick={addToFavorite}>
+          <button
+            aria-label='Add to favorite'
+            className={`icon-btn small ${favoriteObj.photos[id] ? 'active' : ''}`}
+            onClick={() => addToFavorite('photos', id, photo)}
+          >
             <MaterialIcon icon={'favorite'} />
             <div className='state-layer'></div>
           </button>

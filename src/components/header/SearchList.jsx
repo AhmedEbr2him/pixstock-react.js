@@ -25,7 +25,7 @@ const SearchList = ({ searchHistory, setSearchHistory }) => {
           ref={rippleElement}
         >
           <MaterialIcon icon={'history'} />
-          <span className='body-large text'>{item}</span>
+          <span className='bo dy-large text'>{item}</span>
           <span className='remove-item label-medium' onClick={() => removeItem(index)}>
             Remove
           </span>
