@@ -4,16 +4,20 @@ import MaterialIcon from './MaterialIcon';
 import { useRippleEffect } from '../../hooks/useRippleEffect';
 import PropTypes from 'prop-types';
 import useAddToFavorite from '../../hooks/useAddToFavorite';
+import { useEffect, useState } from 'react';
 
 const PhotoCard = ({ photo }) => {
-  const {
-    alt,
-    avg_color: backgroundColor,
-    height,
-    width,
-    id,
-    src: { large },
-  } = photo;
+  const [photoData, setPhotoData] = useState({
+    alt: '',
+    avg_color: {},
+    height: '',
+    width: '',
+    id: '',
+    src: {},
+  });
+  useEffect(() => {
+    photo && setPhotoData(photo);
+  }, [photo]);
 
   const { rippleElement } = useRippleEffect();
 
@@ -41,15 +45,18 @@ const PhotoCard = ({ photo }) => {
     photo && (
       <div
         className='card grid-item'
-        style={{ backgroundColor: backgroundColor }}
+        style={{ backgroundColor: photoData?.avg_color }}
         ref={rippleElement}
       >
-        <figure className='card-banner' style={{ '--width': width, '--height': height }}>
+        <figure
+          className='card-banner'
+          style={{ '--width': photoData?.width, '--height': photoData.height }}
+        >
           <img
-            src={large}
-            alt={alt}
-            width={width}
-            height={height}
+            src={photoData?.src?.large}
+            alt={photoData?.alt}
+            width={photoData?.width}
+            height={photoData?.height}
             loading='lazy'
             className='img-cover'
           />
@@ -57,15 +64,18 @@ const PhotoCard = ({ photo }) => {
         <div className='card-content'>
           <button
             aria-label='Add to favorite'
-            className={`icon-btn small ${favoriteObj.photos[id] ? 'active' : ''}`}
-            onClick={() => addToFavorite('photos', id, photo)}
+            className={`icon-btn small ${favoriteObj.photos[photoData?.id] ? 'active' : ''}`}
+            onClick={() => addToFavorite('photos', photoData?.id, photo)}
           >
             <MaterialIcon icon={'favorite'} />
             <div className='state-layer'></div>
           </button>
         </div>
 
-        <Link to={`${routeConstants.photos_detail}/${id}`} className='state-layer'></Link>
+        <Link
+          to={`${routeConstants.photos_detail}/${photoData?.id}`}
+          className='state-layer'
+        ></Link>
       </div>
     )
   );
