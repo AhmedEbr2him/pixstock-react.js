@@ -9,6 +9,9 @@ import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 const Collections = () => {
   const dispatch = useDispatch();
   const collectionsData = useSelector(state => state.clientReducer.client.collections.featured);
+  const isCollectionLoading = useSelector(
+    state => state.clientReducer.isLoading.collection.fetchFeaturedCollections
+  );
   const [collectionList, setCollectionList] = useState([]);
   const perPage = 18;
   const totalPages = Math.ceil(collectionsData?.total_results / perPage);
@@ -39,7 +42,7 @@ const Collections = () => {
         ))}
       </div>
 
-      <div className='load-more' role='progressbar' ref={loader}></div>
+      {!isCollectionLoading && <div className='load-more' role='progressbar' ref={loader}></div>}
     </div>
   );
 };

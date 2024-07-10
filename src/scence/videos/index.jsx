@@ -4,7 +4,6 @@ import { fetchPopularVideos } from '../../redux/slices/clientSlice';
 import scrollToTop from '../../utils/scrollToTop';
 import { PageTitle, VideoCard } from '../../components';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import Skeleton from '../../components/common/Skeleton';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 const Videos = () => {
   const dispatch = useDispatch();
@@ -48,8 +47,8 @@ const Videos = () => {
           </Masonry>
         </ResponsiveMasonry>
       </div>
-      {isVideosLoading && <Skeleton />}
-      <div className='load-more' role='progressbar' ref={loader}></div>
+
+      {!isVideosLoading && <div className='load-more' role='progressbar' ref={loader}></div>}
     </div>
   );
 };

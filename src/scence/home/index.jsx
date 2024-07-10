@@ -31,7 +31,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchCuratedPhotos({ page: 1, per_page: 15 }));
-    dispatch(fetchPopularVideos({ page: 2, per_page: 15 }));
+    dispatch(fetchPopularVideos({ page: 1, per_page: 15 }));
     dispatch(fetchFeaturedCollections({ page: 2, per_page: 18 }));
     scrollToTop();
   }, [dispatch]);

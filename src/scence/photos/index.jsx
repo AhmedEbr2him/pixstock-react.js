@@ -4,7 +4,6 @@ import { fetchCuratedPhotos } from '../../redux/slices/clientSlice';
 import { useEffect, useState } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import scrollToTop from '../../utils/scrollToTop';
-import Skeleton from '../../components/common/Skeleton';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 const Photos = () => {
@@ -50,8 +49,7 @@ const Photos = () => {
           </Masonry>
         </ResponsiveMasonry>
       </div>
-      {isPhotosLoading && <Skeleton />}
-      <div className='load-more' role='progressbar' ref={loader}></div>
+      {!isPhotosLoading && <div className='load-more' role='progressbar' ref={loader}></div>}
     </div>
   );
 };

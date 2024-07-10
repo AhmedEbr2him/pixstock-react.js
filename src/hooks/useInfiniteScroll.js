@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const useInfiniteScroll = ({ totalPages }) => {
   const loader = useRef(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(2);
   const [isLoad, setIsLoad] = useState(true);
 
   useEffect(() => {
